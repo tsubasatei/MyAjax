@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.7.2.js"></script>
+    <script>
+
+        // get, post 方法
+        $(function () {
+            $("a").click(function () {
+                var url = this.href;
+                // args: JSON 格式
+                // function: 回调函数：当响应结束时，回调函数被触发。相应结果在 data 中。
+                var args = {"time":new Date()};
+                // $.get(url, args, function (data) {
+                $.post(url, args, function (data) {
+                    var name = $(data).find("name").text();
+                    var website = $(data).find("website").text();
+                    var email = $(data).find("email").text();
+                    $("#details").empty()
+                        .append("<h2><a href='"+ email + "'>" + name + "</a></h2>")
+                        .append("<a href='"+ website +"'>" + website + "</a>");
+
+                })
+                return false;
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <h1>People</h1>
+    <ul>
+        <li><a href=".xml">Andy</a></li>
+        <li><a href="andy.xml">Richard</a></li>
+        <li><a href="andy.xml">Jeremy</a></li>
+    </ul>
+    <div id="details"></div>
+</body>
+</html>
